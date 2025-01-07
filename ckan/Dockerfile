@@ -2,6 +2,12 @@ FROM ckan/ckan-base:2.11
 
 # Install any extensions needed by your CKAN instance
 # See Dockerfile.dev for more details and examples
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    xmlsec1 \
+    rustc \
+    cargo \    
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install ckanext-saml2auth \
 
 # Copy custom initialization scripts
 COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
