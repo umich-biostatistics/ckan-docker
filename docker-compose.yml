@@ -11,6 +11,7 @@ services:
     build:
       context: nginx/
       dockerfile: Dockerfile
+    hostname: ckan-nginx
     networks:
       - webnet
       - ckannet
@@ -26,6 +27,7 @@ services:
       dockerfile: Dockerfile
       args:
         - TZ=${TZ}
+    hostname: ckan-biostat
     networks:
       - ckannet
       - dbnet
@@ -52,6 +54,7 @@ services:
       retries: 3
     
   datapusher:
+    hostname: ckan-datapusher
     networks:
       - ckannet
       - dbnet
@@ -66,6 +69,7 @@ services:
   db:
     build:
       context: postgresql/
+    hostname: ckan-db
     networks:
       - dbnet
     environment:
@@ -85,6 +89,7 @@ services:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
      
   solr:
+    hostname: ckan-solr
     networks:
       - solrnet
     image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
@@ -95,6 +100,7 @@ services:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
 
   redis:
+    hostname: ckan-redis
     image: redis:${REDIS_VERSION}
     networks:
       - redisnet
