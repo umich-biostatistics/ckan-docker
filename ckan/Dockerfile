@@ -6,6 +6,8 @@ USER root
 
 RUN pip3 install -e git+https://github.com/umich-biostatistics/ckanext-um_biostat_theme.git#egg=ckanext-um_biostat_theme
 
+RUN pip3 install ckanext-pdfview
+
 # Copy custom initialization scripts
 COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
 
