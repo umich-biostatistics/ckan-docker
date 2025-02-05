@@ -37,6 +37,8 @@ FROM ckan/ckan-dev:2.11
 RUN pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
     pip3 install --no-cache-dir -r https://raw.githubusercontent.com/ckan/ckanext-pdfview/master/dev-requirements.txt
 
+RUN pip3 install -e git+https://github.com/umich-biostatistics/ckanext-um_biostat_theme.git#egg=ckanext-um_biostat_theme
+
 # Copy custom initialization scripts
 COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
 
